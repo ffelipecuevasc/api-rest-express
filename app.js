@@ -5,6 +5,8 @@ import logger from 'morgan';
  * INICIO - Importación de Enrutadores
  * ---------------------------------------------- */
 import indexRouter from './routes/index.js';
+import vecinosRouter from './routes/vecinos.js';
+import cuotasRouter from './routes/cuotas.js';
 /* ----------------------------------------------
  * FIN - Importación de Enrutadores
  * ---------------------------------------------- */
@@ -29,6 +31,8 @@ app.use(express.urlencoded({ extended: false }));
  * INICIO - Configuración de Rutas
  * ---------------------------------------------- */
 app.use('/', indexRouter);
+app.use('/vecinos', vecinosRouter);
+app.use('/cuotas', cuotasRouter);
 /* ----------------------------------------------
  * FIN - Configuración de Rutas
  * ---------------------------------------------- */
