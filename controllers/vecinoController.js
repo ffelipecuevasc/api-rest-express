@@ -1,7 +1,6 @@
-import Vecino from "../models/vecino.js";
-import Cuota from "../models/cuota.js";
+import Vecino from "../models/Vecino.js";
+import Cuota from "../models/Cuota.js";
 import sequelize from "../config/database.js";
-import cuota from "../models/cuota.js";
 
 export const crearVecino = async (req, res) => {
     try {
@@ -82,7 +81,7 @@ export const actualizarVecino = async (req, res) => {
         });
 
         if (filasActualizadas === 0) {
-            res.status(404).json({
+            return res.status(404).json({
                 error: 'Vecino no encontrado o sin cambios detectados.'
             });
         }
@@ -107,7 +106,7 @@ export const eliminarVecino = async (req, res) => {
             });
         }
 
-        res.status(204).json({ message: 'Vecino eliminado correctamente.'});
+        res.status(204).end();
     } catch (error) {
         console.log('Error al eliminar un vecino: ', error);
         res.status(400).json({
@@ -126,11 +125,13 @@ const eliminarVecinoConTransaccion = async (vecinoId) => {
         }
 
         await Cuota.destroy({
-            where: { vecino_id: vecinoId, transaction: t }
+            where: { vecino_id: vecinoId },
+            transaction: t
         });
 
         await Vecino.destroy({
-            where: { id: vecinoId, transaction: t }
+            where: { id: vecinoId },
+            transaction: t
         });
 
         return true;
