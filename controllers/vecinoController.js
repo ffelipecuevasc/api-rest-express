@@ -2,6 +2,7 @@ import Vecino from "../models/Vecino.js";
 import Cuota from "../models/Cuota.js";
 import sequelize from "../config/database.js";
 
+// 🟢 POST /vecinos - Registrar un nuevo vecino
 export const crearVecino = async (req, res) => {
     try {
         const nuevoVecino = await Vecino.create(req.body);
@@ -19,6 +20,7 @@ export const crearVecino = async (req, res) => {
     }
 };
 
+// 🔵 GET /vecinos - Listar todos los vecinos con filtros
 export const obtenerVecinos = async (req, res) => {
     try {
         const { rol } = req.query;
@@ -42,6 +44,7 @@ export const obtenerVecinos = async (req, res) => {
     }
 };
 
+// 🔵 GET /vecinos/:id - Obtener el detalle de un vecino específico
 export const obtenerVecinoPorId = async (req, res) => {
     try {
         const { id } = req.params;
@@ -66,6 +69,7 @@ export const obtenerVecinoPorId = async (req, res) => {
     }
 };
 
+// 🟠 PUT /vecinos/:id - Actualizar datos de un vecino
 export const actualizarVecino = async (req, res) => {
     try {
         const { id } = req.params;
@@ -94,6 +98,7 @@ export const actualizarVecino = async (req, res) => {
     }
 };
 
+// 🔴 DELETE /vecinos/:id - Eliminar un vecino
 export const eliminarVecino = async (req, res) => {
     try {
         const { id } = req.params;
